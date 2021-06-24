@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if request.user.is_superuser %}
+
+        <table class="table table-striped table-dark">
+
+            <thead>
+            <tr>
+                <th scope="col">id</th>
+                <th scope="col">Username</th>
+                <th scope="col">Date login</th>
+                <th scope="col">Email</th>
+                <th scope="col">First Name</th>
+                <th scope="col">Last Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr>
+                    <th scope="row">{{ user.id }}</th>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.last_login }}</td>
+                    <td>
+
+                        {{ user.email }}
+
+                    </td>
+                    <td>
+
+                        {{ user.first_name }}
+
+                    </td>
+                    <td>
+
+                        {{ user.last_name }}
+
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <hr>
+        <hr>
+        <hr>
+        <h2>Profile</h2>
+        <ul>
+            {% if profile.image %}
+                <li>image profile: <img class="img-thumbnail" src="{{ profile.image.url }}" alt=""
+                                        style="width: 100px;height: 100px"></li>
+            {% endif %}
+            <br>
+            <br>
+            <li>user name : {{ profile.user.username }}</li>
+            <li>first name: {{ profile.user.first_name }}</li>
+            <li>last name : {{ profile.user.last_name }}</li>
+            <li>address : {{ profile.adderss }}</li>
+            <li><a class="btn btn-success" href="/update_profile">Edit Profile</a></li>
+        </ul>
+    {% else %}
+        <h2>Profile</h2>
+        <ul>
+            {% if profile.image %}
+                <li>image profile: <img class="img-thumbnail" src="{{ profile.image.url }}" alt=""
+                                        style="width: 100px;height: 100px"></li>
+            {% endif %}
+            <br>
+            <br>
+            <li>user name : {{ profile.user.username }}</li>
+            <li>first name: {{ profile.user.first_name }}</li>
+            <li>last name : {{ profile.user.last_name }}</li>
+            <li>address : {{ profile.adderss }}</li>
+            <li><a class="btn btn-success" href="/update_profile">Edit Profile</a></li>
+        </ul>
+    {% endif %}
+
+{% endblock %}

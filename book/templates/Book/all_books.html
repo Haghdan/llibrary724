@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div>
+        <div class="card text-center">
+            <div class="card-header">
+                <ul class="nav nav-tabs card-header-tabs" class="card-body" dir="rtl">
+                    <li class="nav-item" class="card-body" dir="rtl">
+                        <a class="nav-link active" hret="#" Fstyle="color:red ;" class="card-body" dir="rtl" href="#">
+                            کتاب ها</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="card-body" class="card-body" dir="rtl" align="right">
+                {% for book in page_obj %}
+                    <img src="{{ book.photo.url }}" width="100px" height="100px" dir="ltr" align="center">
+                    <a href="/book/{{ book.id }}/{{ book.name }}" class="card-body" dir="rtl"
+                       align="right">{{ book.name }}</a>
+
+                   <a href="/share/{{ book.id }}">share</a>
+                    <hr>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                     <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}">قبلی</a></li>
+                {% endif %}
+
+                {% for page in page_obj.paginator.page_range %}
+                      {% if page == page_obj.number %}
+                           <li class="page-item" ><a href="?page={{ page }}">{{ page }}</a></li>
+                      {% else %}
+                            <li class="page-item"><a class="page-link" href="?page={{ page }}">{{ page }}</a></li>
+                      {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                    <li class="page-item"><a class="page-link" href=" ?page={{ page_obj.next_page_number }}">بعدی</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+                </div>
+            </div>
+        </div>
+{% endblock %}

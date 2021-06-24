@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>Library</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    {% block custom_tags %} {% endblock %}
+</head>
+<body>
+<nav class="navbar navbar-light" style="background-color: #60128F;" dir="rtl" align="right">
+
+    <style>
+        h1 {
+            color: white;
+            text-shadow: 2px 2px 4px #000000;
+        }
+    </style>
+    </head>
+    <body>
+
+    <h1>فروشگاه آنلاین 724</h1>
+    <a class="btn btn-light btn-sm" href="/" role="button">صفحه اصلی</a>
+
+    {% if request.user.is_authenticated %}
+        <a class="btn btn-light btn-sm" style="background-color: #60128F;" href="/log-out" role="button">خروج</a>
+        <a class="btn btn-light btn-sm" href="/profile" role="button">پنل مدیریت</a>
+    {% else %}
+        <a class="btn btn-light btn-sm" href="/login" role="button">لاگین</a>
+
+        <a class="btn btn-light btn-sm" href="/register" role="button">ثبت نام</a>
+    {% endif %}
+
+
+
+    <form class="form-inline">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-primary" style="background-color: #60128F;" type="submit">جستجو</button>
+    </form>
+</nav>
+
+<div class="jumbotron">
+    {% if messages %}
+        {% for msg in messages %}
+            <p class="alert alert-{{ msg.tags }}">{{ msg }}</p>
+        {% endfor %}
+    {% endif %}
+    {% block content %} {% endblock %}
+</div>
+
+</body>
+</html>
